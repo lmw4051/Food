@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'card1.dart';
+import 'card2.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,10 +13,8 @@ class HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
-    // TODO: Replace with Card1
     const Card1(),
-    // TODO: Replace with Card2
-    Container(color: Colors.green),
+    const Card2(),
     // TODO: Replace with Card3
     Container(color: Colors.blue)
   ];
