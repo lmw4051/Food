@@ -24,9 +24,28 @@ class AppRouter {
         path: '/login',
         builder: (context, state) => const LoginScreen(),
       ),
-      // TODO: Add Onboarding Route
+      GoRoute(
+        name: 'onboarding',
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingScreen(),
+      ),
       // TODO: Add Home Route
     ],
+    redirect: (state) {
+      final loggedIn = appStateManager.isLoggedIn;
+      final loggingIn = state.subloc == '/login';
+      if (!loggedIn) return loggingIn ? null : '/login';
+
+      final isOnboardingComplete = appStateManager.isOnboardingComplete;
+      final onboarding = state.subloc == '/onboarding';
+
+      if (!isOnboardingComplete) {
+        return onboarding ? null : '/onboarding';
+      }
+
+      if (loggingIn || onboarding) return '/${FooderlichTab.explore}';
+      return null;
+    },
     errorPageBuilder: (context, state) {
       return MaterialPage(
         key: state.pageKey,
