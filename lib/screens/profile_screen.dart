@@ -45,10 +45,10 @@ class ProfileScreenState extends State<ProfileScreen> {
       children: [
         buildDarkModeRow(),
         ListTile(
-          title: const Text('View raywenderlich.com'),
+          title: const Text('View apple.com'),
           onTap: () async {
             if (kIsWeb || Platform.isMacOS) {
-              await launchUrl(Uri.parse('https://www.raywenderlich.com/'));
+              await launchUrl(Uri.parse('https://www.apple.com/'));
             } else {
               context.goNamed(
                 'rw',
