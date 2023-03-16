@@ -40,8 +40,41 @@ class AppRouter {
             );
           },
           routes: [
-            // TODO: Add Item Subroute
-            // TODO: Add Profile Subroute
+            GoRoute(
+              name: 'item',
+              path: 'item/:id',
+              builder: (context, state) {
+                final itemId = state.params['id'] ?? '';
+                final item = groceryManager.getGroceryItem(itemId);
+                return GroceryItemScreen(
+                  originalItem: item,
+                  onCreate: (item) {
+                    groceryManager.addItem(item);
+                  },
+                  onUpdate: (item) {
+                    groceryManager.updateItem(item);
+                  },
+                );
+              },
+            ),
+            GoRoute(
+              name: 'profile',
+              path: 'profile',
+              builder: (context, state) {
+                final tab = int.tryParse(state.params['tab'] ?? '') ?? 0;
+                return ProfileScreen(
+                  user: profileManager.getUser,
+                  currentTab: tab,
+                );
+              },
+              routes: [
+                GoRoute(
+                  name: 'rw',
+                  path: 'rw',
+                  builder: (context, state) => const WebViewScreen(),
+                ),
+              ],
+            ),
           ]),
     ],
     redirect: (state) {

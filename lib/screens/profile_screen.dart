@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 
+import 'package:go_router/go_router.dart';
+
 class ProfileScreen extends StatefulWidget {
   final User user;
   final int currentTab;
@@ -48,14 +50,17 @@ class ProfileScreenState extends State<ProfileScreen> {
             if (kIsWeb || Platform.isMacOS) {
               await launchUrl(Uri.parse('https://www.raywenderlich.com/'));
             } else {
-              // TODO: Navigate to WebView
+              context.goNamed(
+                'rw',
+                params: {'tab': '${widget.currentTab}'},
+              );
             }
           },
         ),
         ListTile(
           title: const Text('Log out'),
           onTap: () {
-            // TODO: Logout user
+            Provider.of<AppStateManager>(context, listen: false).logout();
           },
         )
       ],
