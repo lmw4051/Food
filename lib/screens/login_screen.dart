@@ -55,9 +55,7 @@ class LoginScreen extends StatelessWidget {
           'Login',
           style: TextStyle(color: Colors.white),
         ),
-        onPressed: () async {
-          // TODO: Initiate Login
-        },
+        onPressed: () async {},
       ),
     );
   }
